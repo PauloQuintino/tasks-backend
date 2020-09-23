@@ -13,11 +13,11 @@ pipeline{
         }
          stage('Sonar Analysis'){
              environment{
-                 sonnarHome = tool 'SONAR_SCANNER'
+                 scannerHome = tool 'SONAR_SCANNER'
              }
             steps{
                 withSonarQubeEnv('SONAR_LOCAL'){
-                    bat "${sonnarHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=e0d623a62889546174d34ef9d6239a4edf046c91 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**, **/src/test/**, **/model/**, **Application.java"
+                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=e0d623a62889546174d34ef9d6239a4edf046c91 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
                 }                
             }
         }
